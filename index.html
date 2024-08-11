@@ -61,8 +61,8 @@
         // Function to reduce a number to a single digit
         function reduceToSingleDigit(number) {
             while (number > 9) {
-                number = number.toString().split('').reduce(function(sum, digit) {
-                    return sum + parseInt(digit);
+                number = number.toString().split('').reduce(function(acc, digit) {
+                    return acc + parseInt(digit);
                 }, 0);
             }
             return number;
@@ -80,11 +80,12 @@
                 sum += list[l] || parseInt(l);
             }
 
-            // Reduce the sum to a single digit
-            sum = reduceToSingleDigit(sum);
+            // Reduce to single digit if sum is two digits
+            var reducedSum = reduceToSingleDigit(sum);
 
             // Write the sum to screen
-            result.innerHTML += '<div class="result-text">' + text + ' ' + sum + '</div>';
+            result.innerHTML += '<div class="result-text">' + text + ' ' + sum + 
+                                (sum > 9 ? ' / ' + reducedSum : '') + '</div>';
         }
 
     </script>
