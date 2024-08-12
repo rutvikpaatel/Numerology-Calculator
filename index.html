@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Numerology calculator</title>
+    <title>Numerology Calculator</title>
     <link rel="stylesheet" type="text/css" href="./Numerology calculator_files/app.css">
 </head>
 
@@ -12,7 +12,7 @@
     </header>
     <div class="nav">
         <h3>Convert Words To Numbers</h3>
-        <p>Enter The Name:</p>
+        <p>Enter the name:</p>
         <div class="content">
             <input type="text" id="nameInput">
             <button onclick="calculate()">Calculate</button>
@@ -21,6 +21,13 @@
                 <div class="result-text">Chaldean 0</div>
             </div>
         </div>
+    </div>
+
+    <!-- Adding a new section for detailed calculations -->
+    <div class="detailed-result">
+        <h3>Detailed Calculations</h3>
+        <div id="pythagorasDetail"></div>
+        <div id="chaldeanDetail"></div>
     </div>
 
     <script>
@@ -40,6 +47,8 @@
         var input = document.querySelector('input');
         var button = document.querySelector('button');
         var result = document.querySelector('.result');
+        var pythagorasDetail = document.getElementById('pythagorasDetail');
+        var chaldeanDetail = document.getElementById('chaldeanDetail');
 
         // Add an event listener for the Enter key
         input.addEventListener('keydown', function(event) {
@@ -52,10 +61,12 @@
         function calculate() {
             // Empty HTML
             result.innerHTML = '';
+            pythagorasDetail.innerHTML = '';
+            chaldeanDetail.innerHTML = '';
 
             // Print results
-            printResult(PYTHAGOREAN, 'Pythagoras');
-            printResult(CHALDEAN, 'Chaldean');
+            printResult(PYTHAGOREAN, 'Pythagoras', pythagorasDetail);
+            printResult(CHALDEAN, 'Chaldean', chaldeanDetail);
         }
 
         // Function to reduce a number to a single digit
@@ -69,25 +80,35 @@
         }
 
         // Print list
-        function printResult(list, text) {
+        function printResult(list, text, detailElement) {
             var letters = input.value.toLowerCase().replace(/[^0-9a-z]/g, '').split('');
-            var sum = 0, l, i;
-            for (i = 0; i < letters.length; i++) {
-                // Extract letter from array
-                l = letters[i];
+            var sum = 0;
+            var details = '<div style="display: flex;">';
 
-                // Lookup or convert letter and add to sum
-                sum += list[l] || parseInt(l);
+            for (var i = 0; i < letters.length; i++) {
+                var letter = letters[i];
+                var value = list[letter] || parseInt(letter);
+                sum += value;
+
+                // Add detailed calculation with the number below the letter
+                details += '<div style="margin-right: 10px; text-align: center;">';
+                details += '<span>' + letter.toUpperCase() + '</span><br>';
+                details += '<span>' + value + '</span>';
+                details += '</div>';
             }
+
+            details += '</div>';
 
             // Reduce to single digit if sum is two digits
             var reducedSum = reduceToSingleDigit(sum);
 
-            // Write the sum to screen
+            // Write the sum to the main result area
             result.innerHTML += '<div class="result-text">' + text + ' ' + sum + 
                                 (sum > 9 ? ' / ' + reducedSum : '') + '</div>';
-        }
 
+            // Write detailed calculation to the respective detail section
+            detailElement.innerHTML = '<p>' + text + ' Calculation:</p>' + details;
+        }
     </script>
 </body>
 </html>
