@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+<!-- saved from url=(0090)file:///C:/Users/VIVAN/Downloads/Numerology_Calculator/Numerology_Calculator_V5/index.html -->
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Numerology Calculator</title>
-    <link rel="stylesheet" type="text/css" href="./Numerology calculator_files/app.css">
+    <link rel="stylesheet" type="text/css" href="./Numerology Calculator_files/app.css">
 </head>
 
 <body>
@@ -12,23 +13,21 @@
     </header>
     <div class="nav">
         <h3>Convert Words To Numbers</h3>
-        <p>Enter the name:</p>
         <div class="content">
-            <input type="text" id="nameInput">
+            <input type="text" id="nameInput" placeholder="Enter name here" aria-label="Name input">
             <button onclick="calculate()">Calculate</button>
-            <div class="result">
-                <div class="result-text">Pythagoras 0</div>
-                <div class="result-text">Chaldean 0</div>
-            </div>
+            <div class="result"><!-- Results will be appended here --></div>
         </div>
     </div>
 
     <!-- Adding a new section for detailed calculations -->
+ <div class="nav">
     <div class="detailed-result">
         <h3>Detailed Calculations</h3>
-        <div id="pythagorasDetail"></div>
-        <div id="chaldeanDetail"></div>
+        <div id="pythagorasDetail"><!-- Detailed Pythagoras results will be displayed here --></div>
+        <div id="chaldeanDetail"><!-- Detailed Chaldean results will be displayed here --></div>
     </div>
+</div>
 
     <script>
         var PYTHAGOREAN = {
@@ -64,9 +63,21 @@
             pythagorasDetail.innerHTML = '';
             chaldeanDetail.innerHTML = '';
 
+            // Get the name input
+            var name = input.value.trim();
+            if (!name) return; // Do nothing if input is empty
+
+            var nameUpperCase = name.toUpperCase();
+            
+            // Add name to results
+            result.innerHTML += '<div class="result-text">Name: ' + nameUpperCase + '</div>';
+
             // Print results
             printResult(PYTHAGOREAN, 'Pythagoras', pythagorasDetail);
             printResult(CHALDEAN, 'Chaldean', chaldeanDetail);
+
+            // Clear the input field
+            input.value = '';
         }
 
         // Function to reduce a number to a single digit
@@ -110,5 +121,6 @@
             detailElement.innerHTML = '<p>' + text + ' Calculation:</p>' + details;
         }
     </script>
+
 </body>
 </html>
