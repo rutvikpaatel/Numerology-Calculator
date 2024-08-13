@@ -4,6 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Numerology Calculator</title>
     <link rel="stylesheet" type="text/css" href="./Numerology calculator_files/app.css">
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&display=swap">
+
 </head>
 
 <body>
@@ -14,18 +18,20 @@
         <h3>Convert Words To Numbers</h3>
         <div class="content">
             <input type="text" id="nameInput" placeholder="Enter name here" aria-label="Name input">
-            <button onclick="calculate()">Calculate</button>
+            <div class="button-container">
+                <button onclick="calculate()">Calculate</button>
+            </div>
             <div class="result"><!-- Results will be appended here --></div>
         </div>
     </div>
 
     <!-- Adding a new section for detailed calculations -->
     <div class="nav">
-    <div class="detailed-result">
-        <h3>Detailed Calculations</h3>
-        <div id="pythagorasDetail"><!-- Detailed Pythagoras results will be displayed here --></div>
-        <div id="chaldeanDetail"><!-- Detailed Chaldean results will be displayed here --></div>
-    </div>
+        <div class="detailed-result">
+            <h3>Detailed Calculations</h3>
+            <div id="pythagorasDetail"><!-- Detailed Pythagoras results will be displayed here --></div>
+            <div id="chaldeanDetail"><!-- Detailed Chaldean results will be displayed here --></div>
+        </div>
     </div>
 
     <script>
@@ -93,7 +99,7 @@
         function printResult(list, text, detailElement) {
             var letters = input.value.toLowerCase().replace(/[^0-9a-z]/g, '').split('');
             var sum = 0;
-            var details = '<div style="display: flex;">';
+            var details = '<div class="detail-container">';
 
             for (var i = 0; i < letters.length; i++) {
                 var letter = letters[i];
@@ -101,7 +107,7 @@
                 sum += value;
 
                 // Add detailed calculation with the number below the letter
-                details += '<div style="margin-right: 10px; text-align: center;">';
+                details += '<div class="letter-container">';
                 details += '<span>' + letter.toUpperCase() + '</span><br>';
                 details += '<span>' + value + '</span>';
                 details += '</div>';
@@ -120,6 +126,5 @@
             detailElement.innerHTML = '<p>' + text + ' Calculation:</p>' + details;
         }
     </script>
-
 </body>
 </html>
