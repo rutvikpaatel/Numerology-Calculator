@@ -124,6 +124,7 @@ input {
   color: var(--text-dark);
   border: 1px solid var(--border-color-light);
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  text-align: center;
 }
 
 input:focus {
@@ -286,6 +287,7 @@ body.dark-mode table, body.dark-mode th, body.dark-mode td {
     font-size: 14px;
     padding: 8px 16px;
     width: 100%;
+    box-sizing: border-box;
     margin-top: 10px;
   }
 
@@ -337,6 +339,7 @@ body.dark-mode table, body.dark-mode th, body.dark-mode td {
     font-size: 12px;
     padding: 6px 12px;
     width: 100%;
+    box-sizing: border-box;
     margin-top: 8px;
   }
 
