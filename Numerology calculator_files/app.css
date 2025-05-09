@@ -116,8 +116,6 @@ button:hover, button:focus {
 }
 
 input {
-  width: 100%; /* ✅ Fill full width */
-  box-sizing: border-box; /* ✅ Prevent padding from causing overflow */
   padding: 10px 20px;
   border-radius: 4px;
   font-size: 16px;
