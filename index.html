@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ✅ Added for mobile support -->
     <title>Numerology Calculator</title>
     <link rel="stylesheet" type="text/css" href="./Numerology calculator_files/app.css">
 
@@ -66,45 +67,35 @@
             's': 3, 't': 4, 'u': 6, 'v': 6, 'w': 6, 'x': 5, 'y': 1, 'z': 7
         };
 
-        // Set up HTML elements
         var input = document.querySelector('input');
         var button = document.querySelector('button');
         var result = document.querySelector('.result');
         var pythagorasDetail = document.getElementById('pythagorasDetail');
         var chaldeanDetail = document.getElementById('chaldeanDetail');
 
-        // Add an event listener for the Enter key
         input.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
                 calculate();
             }
         });
 
-        // Calculate function
         function calculate() {
-            // Empty HTML
             result.innerHTML = '';
             pythagorasDetail.innerHTML = '';
             chaldeanDetail.innerHTML = '';
 
-            // Get the name input
             var name = input.value.trim();
-            if (!name) return; // Do nothing if input is empty
+            if (!name) return;
 
             var nameUpperCase = name.toUpperCase();
-            
-            // Add name to results
             result.innerHTML += '<div class="result-text">Name: ' + nameUpperCase + '</div>';
 
-            // Print results
             printResult(PYTHAGOREAN, 'Pythagoras', pythagorasDetail);
             printResult(CHALDEAN, 'Chaldean', chaldeanDetail);
 
-            // Clear the input field
             input.value = '';
         }
 
-        // Function to reduce a number to a single digit
         function reduceToSingleDigit(number) {
             while (number > 9) {
                 number = number.toString().split('').reduce(function(acc, digit) {
@@ -114,7 +105,6 @@
             return number;
         }
 
-        // Print list
         function printResult(list, text, detailElement) {
             var letters = input.value.toLowerCase().replace(/[^0-9a-z]/g, '').split('');
             var sum = 0;
@@ -125,7 +115,6 @@
                 var value = list[letter] || parseInt(letter);
                 sum += value;
 
-                // Add detailed calculation with the number below the letter
                 details += '<div class="letter-container">';
                 details += '<span>' + letter.toUpperCase() + '</span><br>';
                 details += '<span>' + value + '</span>';
@@ -134,18 +123,14 @@
 
             details += '</div>';
 
-            // Reduce to single digit if sum is two digits
             var reducedSum = reduceToSingleDigit(sum);
 
-            // Write the sum to the main result area
             result.innerHTML += '<div class="result-text">' + text + ' ' + sum + 
                                 (sum > 9 ? ' / ' + reducedSum : '') + '</div>';
 
-            // Write detailed calculation to the respective detail section
             detailElement.innerHTML = '<p>' + text + ' Calculation:</p>' + details;
         }
 
-        // Toggle Dark Mode
         function toggleDarkMode() {
             var isChecked = document.getElementById('darkModeToggle').checked;
             if (isChecked) {
